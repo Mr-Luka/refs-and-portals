@@ -12,6 +12,7 @@ export default function TimerChallenge({title, targetTime}){
         timer.current = setTimeout(()=> {
             setTimerExpired(true);
             dialog.current.showModal();
+            // with this we are opening modal
         }, targetTime * 1000);
 
         setTimerStarted(true);
@@ -22,7 +23,8 @@ export default function TimerChallenge({title, targetTime}){
     }
     return (
       <>
-        <ResultModal ref={dialog} targetTime={targetTime} result='lost'/>
+      {/* ref={} its named ref, because in the ResultModal component we named it ref, but it has the same purpose */}
+        <ResultModal ref={dialog} targetTime={targetTime} result='lost'/> 
         <section className="challenge">
             <h2>{title}</h2>
             <p className="challenge-time">
