@@ -1,27 +1,22 @@
-export default function ResultModal({result, targetTime, ref}){
-    return (
-    <dialog className='result-modal' ref={ref}>
-        <h2>You {result}</h2>
-        <p>The target time was <strong>{targetTime} seconds.</strong></p>
-        <p>You stopped the timer with <strong>X seconds left.</strong></p>
-        <form method='dialog'>
-            <button>Close</button>
-        </form>
-    </dialog>
-    );
-}
 
 
+// for older versions of React 19:
 
-
-/* 
-or for older versions of React 19:
-
-import {useRef} from 'react';
+import {forwardRef, useImperativeHandle, useRef} from 'react';
 
 const ResultModal = forwardRef(function ResultModal({result, targetTime}, ref) {
+    const dialog = useRef();
+
+    useImperativeHandle(ref, ()=> {
+        return {
+            open() {
+                dialog.current.showModal();
+            }
+        }
+    })
+
     return (
-        <dialog className='result-modal' ref={ref}>
+        <dialog className='result-modal' ref={dialog}>
         <h2>You {result}</h2>
         <p>The target time was <strong>{targetTime} seconds.</strong></p>
         <p>You stopped the timer with <strong>X seconds left.</strong></p>
@@ -34,4 +29,15 @@ const ResultModal = forwardRef(function ResultModal({result, targetTime}, ref) {
 
 export default ResultModal
 
-*/
+// export default function ResultModal({result, targetTime, ref}){
+//     return (
+//     <dialog className='result-modal' ref={ref}>
+//         <h2>You {result}</h2>
+//         <p>The target time was <strong>{targetTime} seconds.</strong></p>
+//         <p>You stopped the timer with <strong>X seconds left.</strong></p>
+//         <form method='dialog'>
+//             <button>Close</button>
+//         </form>
+//     </dialog>
+//     );
+// }
