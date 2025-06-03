@@ -13,7 +13,7 @@ export default function TimerChallenge({title, targetTime}){
         clearInterval(timer.current);
         dialog.current.open();
     }
-
+    // function that will reset the timer
     function handleReset(){
         setTimeRemaining(targetTime * 1000);
     }
